@@ -9,9 +9,7 @@ library (ggrepel)
 library (ggsave)
 library(Cairo)
 
-
-#######USE THIS 
-#note you have some missing data
+#heandling missing data
 nomissing <- na.omit(data) #chull function does not work with missing data
 
 #getting the convex hull of each unique point set
@@ -38,7 +36,8 @@ plot + sc+p1+p2+
            (1.32, 0.87)', size=5, x=1.39, y=0.825)+
   annotate("text", label='C2 Medoids 
            (-0.78, 0.93)', size=5, x=-0.7, y=0.88)
-#####
+#save
+#OR use copy bmp on R graphic
 save
 
 dev.copy2pdf(file="plot.tiff",out.type="cairo", width=8, height=5)
