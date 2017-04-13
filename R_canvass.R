@@ -1,0 +1,47 @@
+
+library(ggplot2)
+library(grid)
+library(gridExtra)
+library(ggfortify)
+library(plyr)
+library(reshape2)
+library (ggrepel)
+library (ggsave)
+library(Cairo)
+
+
+#######USE THIS 
+#note you have some missing data
+nomissing <- na.omit(data) #chull function does not work with missing data
+
+#getting the convex hull of each unique point set
+df <- nomissing
+find_hull <- function(df) df[chull(df$var1, df$var2), ]
+hulls <- ddply(df, "Class", find_hull)
+sc <- scale_fill_manual(values = c("gray80", "gray80"), breaks=c("1","2"), labels=c("C1", "C2"),name="Class")
+
+p1 <-  geom_point(aes(x=1.31543, y=0.869,fill = NULL), shape=8, size =5)
+p1$legend <- FALSE
+p2 <- geom_point(aes(x=-0.78046, y=0.9276,fill = NULL), shape=8, size =5)
+p2$legend <- FALSE
+plot <- ggplot(data = nomissing, aes(x = var1, y = var2,  fill=Class)) +
+  geom_point(aes(shape=Class), size=3) +
+  geom_polygon(data = hulls, alpha = 0.5) +
+  theme_classic()+
+  theme_bw()+
+  theme(panel.background = element_rect(colour = "black"),
+        axis.title=element_text(size=16,face="bold"),axis.text=element_text(size=15), legend.position = "right")+
+  labs(title="", x ="VAR1", y = "VAR2", legend.title="Class")
+
+plot + sc+p1+p2+
+  annotate("text", label='C1 Medoids 
+           (1.32, 0.87)', size=5, x=1.39, y=0.825)+
+  annotate("text", label='C2 Medoids 
+           (-0.78, 0.93)', size=5, x=-0.7, y=0.88)
+#####
+save
+
+dev.copy2pdf(file="plot.tiff",out.type="cairo", width=8, height=5)
+
+postscript("Plot3.eps", width = 480, height = 480)
+dev.off()
