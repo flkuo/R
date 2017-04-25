@@ -3,6 +3,7 @@ library(pwr)
 library(lsr)
 library(plotly)
 library(plyr)
+library(ggplot2)
 
 ##Paired t-test#USE Book1
 
@@ -29,7 +30,7 @@ postquant = data$postquant
 cohensD(prequant, postquant, method = "paired") # ... explicitly indicate that it's paired, or else
 cohensD(postquant - prequant)  # ... do a "single-sample" calculation on the difference
 
-#Graphic each item with 5-grade level
+#Graphic each item with 5-grade level  #Use graphic csv
 mu <- ddply(data, "critique", summarise, grp.mean=mean('critique'))
 head(mu)
 a <- ggplot(data, aes(x = critique))
