@@ -1,7 +1,4 @@
-rm(list=ls())
-setwd("C:/Users/Kuo/Desktop")
-data = read.csv("ev2018_unimas.csv",sep=",", header=T)  # read csv file
-data
+
 str(data)
 library(ggplot2) 
 library(dplyr)
@@ -13,7 +10,7 @@ cbPalette <- c("#E69F00", "#999999", "#D55E00", "#0072B2", "#F0E442", "#CC79A7",
 cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7", "#0072B2", "#D55E00")
 
 -------------------------------------------------------------------------
-  #USE this one
+  #Stacked bar chart with a line
   ggplot() + 
   geom_bar(data = data, aes(x=month, y=n, fill=Genotype), stat = "identity")+
   geom_line(data = data, aes(x=month2, y=data$Samples, group = 1, linetype = "Samples tested")) +
