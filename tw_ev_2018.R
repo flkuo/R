@@ -1,7 +1,5 @@
-rm(list=ls())
-setwd("C:/Users/Kuo/Desktop")
-data = read.csv("ev2018.csv",sep=",", header=T)  # read csv file
-data
+
+
 str(data)
 library(ggplot2) 
 library(dplyr)
@@ -21,17 +19,3 @@ cbbbPalette <- c("#66CC99","#9999CC","#CC6666",  "#F0E442", "#999999", "#E69F00"
  labs(x = "Taiwan 2019", y="No. of isolates")+
   theme(axis.text=element_text(size=13),
         axis.title=element_text(size=14,face="bold"))
-
-
-
-ggplot(data=data, aes(x=month, y=Samples received)) +
-  geom_line() +
-  geom_point()
-
-
-
-  
-  scale_fill_brewer(palette="Spectral")
-  
-scale_fill_hue(c=45, l=80)
-  
