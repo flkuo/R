@@ -46,9 +46,26 @@ p4 <- ggplot(data, aes(x = Location, y = n, fill = factor(group))) +
 grid.arrange(p3, p4, ncol = 2)
 
 
+#3 
 
+library(ggplot2)
+theme_set(theme_bw())  
 
+# Data Prep
+data # load data
+data$n_z <- round((data$n - mean(data$n))/sd(data$n), 2)  # compute normalized n
+data$n_type <- ifelse(data$n_z < 0, "below", "above")  # above / below avg flag
+data <- data[order(data$n_z), ]  # sort
+data$Location <- factor(data$Location , levels = data$Location)  # convert to factor to retain sorted order in plot.
 
-
+# Diverging Barcharts
+ggplot(data, aes(x=Location, y=n_z, label=n_z)) + 
+  geom_bar(stat='identity', aes(fill=n_type), width=.5)  +
+  scale_fill_manual(name="residents", 
+                    labels = c("Above Average", "Below Average"), 
+                    values = c("above"="#00ba38", "below"="#f8766d")) + 
+  labs(subtitle="number of residents in healthcare facilties'", 
+       title= "Diverging Bars") + 
+  coord_flip()
 
 
