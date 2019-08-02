@@ -1,13 +1,8 @@
-rm(list=ls())
-setwd("C:/Users/Kuo/Desktop")
-data = read.csv("Book1.csv",sep=",", header=T)  # read csv file
-data
-str(data)
 
 require(lattice)
 library(ggplot2) 
 
-##
+#1
 p1<- ggplot(data=data, aes(x=Location, y=n, fill=as.factor(group))) +
   geom_bar(stat="identity", position=position_dodge())+
   geom_text(aes(label=n), vjust=1.2, color="white",
@@ -28,7 +23,7 @@ p2<- ggplot(data=data, aes(x=Location, y=n, fill=as.factor(group))) +
   theme(panel.background = element_rect(colour = "black"),axis.text.x=element_text(size=9, angle = 90), axis.title=element_text(size=12,face="bold"), legend.title = element_text(size = 9), legend.text = element_text(size = 9))
 grid.arrange(p1, p2, ncol = 2)
 
-### compare mpg across all cars and color based on cyl
+#2 compare mpg across all cars and color based on cyl
 library(dplyr)          # for data manipulation
 library(tidyr)          # for data manipulation
 library(magrittr)       # for easier syntax in one or two areas
