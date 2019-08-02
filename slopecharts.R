@@ -1,12 +1,8 @@
-### Compare different timepoint
-rm(list=ls())
-setwd("C:/Users/Kuo/Desktop")
-data = read.csv("Book3.csv",sep=",", header=T)  # read csv file
-data
+### Comparison with 2 different timepoints
+
 library(ggplot2)
 library(scales)
 theme_set(theme_classic())
-## Another dataset
 
 str(data) 
 # prep data
